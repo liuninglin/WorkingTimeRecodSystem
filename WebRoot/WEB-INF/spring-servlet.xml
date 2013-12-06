@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- 自动扫描bean，把作了注解的类转换为bean -->
+	<context:component-scan base-package="com" />
+	
+	<!-- 定义jdbc配置信息路径 -->
+	<context:property-placeholder location="/WEB-INF/jdbc.properties" />
+	
+	<!-- jdbcTemplate数据库操作类 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+        <property name="dataSource" ref="dataSource" />  
+    </bean> 
+	
+	<!-- 数据源配置,使用c3p0数据库连接池 --> 
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  
+                destroy-method="close"  
+                p:driverClass="${app.jdbc.driverClassName}"  
+                p:jdbcUrl="${app.jdbc.url}"  
+                p:user="${app.jdbc.username}"  
+                p:password="${app.jdbc.password}"  
+                p:acquireIncrement="5"  
+                p:idleConnectionTestPeriod="60"  
+                p:maxPoolSize="100"  
+                p:maxStatements="50"  
+                p:minPoolSize="10" />
+       
+     <!-- 定义事务管理 -->  
+    <!-- See http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/transaction.html -->  
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"   
+                p:dataSource-ref="dataSource" /> 
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+		
+	<!-- 处理Mutipart文件上次的bean -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:defaultEncoding="utf-8" />
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/" p:suffix=".jsp" />
+		
+	<!-- memcache缓存池 
+    <bean id="memcachedPool" class="com.danga.MemCached.SockIOPool"  
+        factory-method="getInstance" init-method="initialize" destroy-method="shutDown">  
+        <constructor-arg>  
+            <value>neeaMemcachedPool</value>  
+        </constructor-arg>  
+        <property name="servers">  
+            <list>  
+                <value>127.0.0.1:12111</value>  
+            </list>  
+        </property>  
+        <property name="initConn">  
+            <value>20</value>  
+        </property>  
+        <property name="minConn">  
+            <value>10</value>  
+        </property>  
+        <property name="maxConn">  
+            <value>50</value>  
+        </property>  
+        <property name="maintSleep">  
+            <value>30000</value>  
+        </property>  
+        <property name="nagle">  
+            <value>false</value>  
+        </property>  
+        <property name="socketTO">  
+            <value>3000</value>  
+        </property>  
+    </bean>  
+    -->  
+</beans>
