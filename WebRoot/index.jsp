@@ -11,6 +11,7 @@
 		<base href="<%=basePath%>">
 	</head>
 	<body>
+		<a href="create.html">Create User</a>
 		<a href="save.html?name=dongji">Save User</a>
 	</body>
 </html>

@@ -10,38 +10,34 @@ import org.springframework.stereotype.Service;
 import com.model.User;
 import com.service.UserService;
 
+/**
+* ç±»æè¿°ï¼š 
+* åˆ›å»ºè€…ï¼šåˆ˜å®æ—
+* é¡¹ç›®åç§°ï¼š WorkingTimeRecodSystem
+* åˆ›å»ºæ—¶é—´ï¼š 2013-12-11 ä¸‹åˆ05:04:40
+* ç‰ˆæœ¬å·ï¼š v1.0
+*/
 @Service("uService")
 public class UserServiceImpl implements UserService {
 	@Resource
 	private JdbcTemplate jdbcTemplate;
 
-	/**
-	 * ÍæÊı¾İ¿âÌí¼ÓÒ»Ìõ¼ÇÂ¼
-	 * 
-	 * @param u
-	 *            ÓÃ»§
-	 */
 	public void save(User u) {
-		jdbcTemplate.update("insert into user values(null,?)", u.getName());
+		jdbcTemplate.update("insert into foo values(1,?)", u.getName());
 	}
 
-	/**
-	 * É¾³ıÒ»¸öÓÃ»§
-	 * 
-	 * @param id
-	 *            ÓÃ»§id
-	 */
 	public void delete(Integer id) {
-		jdbcTemplate.update("delete from user where id=?", id);
+		jdbcTemplate.update("delete from foo where id=?", id);
 	}
 
-	/**
-	 * ²éÑ¯ËùÓĞÓÃ»§ĞÅÏ¢
-	 * 
-	 * @return ËùÓĞÓÃ»§µÄ¼¯ºÏ
-	 */
 	public List findAll() {
-		return jdbcTemplate.queryForList("SELECT * FROM `user`");
+		return jdbcTemplate.queryForList("SELECT * FROM foo");
+	}
+
+	@Override
+	public void create()
+	{
+		jdbcTemplate.update("create table foo (FOOID INT NOT NULL,FOONAME VARCHAR(30) NOT NULL)");
 	}
 
 }

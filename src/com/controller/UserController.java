@@ -1,7 +1,5 @@
 package com.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,17 +11,24 @@ import com.model.User;
 import com.service.UserService;
 
 /**
- * ¿ØÖÆÆ÷
- * 
- * @author dongji
- * 
- */
+* ç±»æè¿°ï¼š 
+* åˆ›å»ºè€…ï¼šåˆ˜å®æ—
+* é¡¹ç›®åç§°ï¼š WorkingTimeRecodSystem
+* åˆ›å»ºæ—¶é—´ï¼š 2013-12-11 ä¸‹åˆ05:04:51
+* ç‰ˆæœ¬å·ï¼š v1.0
+*/
 @Controller
 public class UserController{
 
 	@Resource(name = "uService")
 	private UserService uService;
 
+	@RequestMapping("/create")
+	public String create(HttpServletRequest request) {
+		uService.create();
+		return "hello";
+	}
+	
 	@RequestMapping("/save")
 	public String save(HttpServletRequest request, User u) {
 		uService.save(u);
@@ -38,7 +43,7 @@ public class UserController{
 	public ModelAndView delete(HttpServletRequest request) {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		uService.delete(id);
-		request.setAttribute("message", "Äú¸Õ²ÅÉ¾³ıÁËIDÎª"+id+"µÄÈË!!!");
+		request.setAttribute("message", "AA"+id+"CC");
 		request.setAttribute("users", uService.findAll());
 		return new ModelAndView("hello");
 	}

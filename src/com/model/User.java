@@ -1,11 +1,12 @@
 package com.model;
 
 /**
- * �����û���
- * 
- * @author dongji
- * 
- */
+* 类描述： 
+* 创建者：刘宁林
+* 项目名称： WorkingTimeRecodSystem
+* 创建时间： 2013-12-11 下午05:05:10
+* 版本号： v1.0
+*/
 public class User
 {
 	private int id;

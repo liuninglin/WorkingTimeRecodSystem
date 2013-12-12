@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="WorkingTimeRecodSystem"
+  name="WorkingTimeRecordSystem"
   id="myeclipse.1320638148921"
-  context-root="/WorkingTimeRecodSystem"
+  context-root="/WorkingTimeRecordSystem"
   j2ee-spec="5.0"
-  archive="WorkingTimeRecodSystem.war">
+  archive="WorkingTimeRecordSystem.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>
