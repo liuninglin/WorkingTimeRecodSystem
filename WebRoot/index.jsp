@@ -12,6 +12,6 @@
 	</head>
 	<body>
 		<a href="create.html">Create User</a>
-		<a href="save.html?name=dongji">Save User</a>
+		<a href="save.html?name=dongji23">Save User</a>
 	</body>
 </html>

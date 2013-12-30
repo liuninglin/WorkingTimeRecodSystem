@@ -5,6 +5,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -25,11 +26,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <br>${message} 
     <br/>
     <#list users as user>
-		<c:out value="${user.id}"></c:out>
-    	<c:out value="${user.name}"></c:out>
-    	<a href="delete.html?id=${user.id }">删除</a>
-    	<br/>
+    	${user.id}
 	</#list>
+	
+	<#list ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期天"] as x> 
+${x} 
+</#list> 
     <br/>
   </body>
 </html>
