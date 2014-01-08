@@ -1,8 +1,6 @@
 package com.service;
 
-import java.util.List;
-
-import com.model.User;
+import com.common.exception.ServiceException;
 
 /**
 * 类描述： 
@@ -11,9 +9,6 @@ import com.model.User;
 * 创建时间： 2013-12-11 下午05:04:31
 * 版本号： v1.0
 */
-public interface UserService {
-	void save(User u);
-	void delete(Integer id);
-	List<User> findAll();
-	void create();
+public interface UserService<T> {
+	public T checkLogin(String username, String password) throws ServiceException;
 }

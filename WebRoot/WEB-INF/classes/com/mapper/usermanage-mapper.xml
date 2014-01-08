@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserManageMapper">
+    <select id="checkUserManageIsExist" resultType="usermanage">
+        <![CDATA[
+            select username,usertype,otherinfo,lastlogintime,createtime,updatetime from usermanage where username = #{username} and password = #{password} and showtype = '1'
+        ]]>
+    </select>
+    
+    <insert id="addUserManage" parameterType="usermanage">
+        insert into usermanage(username, usertype, password, otherinfo, showtype, createtime, updatetime)
+        values(#{username}, #{usertype}, #{password}, #{otherinfo}, #{showtype}, varchar(current_timestamp), varchar(current_timestamp))
+    </insert>
+    
+    <update id="editUserManage" parameterType="usermanage">
+        update usermanage set
+        username = #{username},
+        usertype = #{usertype},
+        password = #{password},
+        otherinfo = #{otherinfo},
+        showtype = #{showtype},
+        updatetime = varchar(current_timestamp)  
+        where userid = #{userid}
+    </update>
+    
+    <delete id="removeUserManage" parameterType="int">
+        delete from usermanage where userid = #{userid}
+    </delete>
+</mapper>

@@ -1,13 +1,11 @@
 package com.service.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.model.User;
+import com.common.exception.ServiceException;
+import com.dao.UserManageDao;
+import com.entity.UserManage;
 import com.service.UserService;
 
 /**
@@ -18,26 +16,19 @@ import com.service.UserService;
 * 版本号： v1.0
 */
 @Service("uService")
-public class UserServiceImpl implements UserService {
-	@Resource
-	private JdbcTemplate jdbcTemplate;
+public class UserServiceImpl<T extends UserManage> implements UserService<T> {
 
-	public void save(User u) {
-		jdbcTemplate.update("insert into foo values(1,?)", u.getName());
-	}
-
-	public void delete(Integer id) {
-		jdbcTemplate.update("delete from foo where id=?", id);
-	}
-
-	public List findAll() {
-		return jdbcTemplate.queryForList("SELECT * FROM foo");
-	}
-
+	@Autowired
+	private UserManageDao<T> userManageDao;
+	
+	//用户登录
 	@Override
-	public void create()
+	public T checkLogin(String username, String password) throws ServiceException
 	{
-		jdbcTemplate.update("create table foo (FOOID INT NOT NULL,FOONAME VARCHAR(30) NOT NULL)");
+		if(null == username || "".equals(username.trim()) || null == password || "".equals(password.trim()))
+		{
+			throw new ServiceException("用户名或密码不能为空！");
+		}
+		return userManageDao.checkUserManageIsExist(username, password);
 	}
-
 }
